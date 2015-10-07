@@ -35,3 +35,8 @@ fi
 if [ -d "usr/class/cs143/cool/bin" ] ; then
     PATH="usr/class/cs143/cool/bin:$PATH"
 fi
+
+# use Intel complier libraries if present
+if [ -e "$HOME/.local/opt/intel/bin/compilervars.sh" ] && [ "uname -m" == "x86_64" ] ; then
+    source "$HOME/.local/opt/intel/bin/compilervars.sh" intel64
+fi

@@ -1,4 +1,4 @@
-# ~/.profile: executed by the command interpreter for login shells.
+# ~/.Profile: executed by the command interpreter for login shells.
 # This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
 # exists.
 # see /usr/share/doc/bash/examples/startup-files for examples.
@@ -15,6 +15,9 @@ if [ -n "$BASH_VERSION" ]; then
 	. "$HOME/.bashrc"
     fi
 fi
+
+# get distribution name
+DISTRIBUTION=`awk -F= '/^NAME/{print $2}' /etc/os-release`
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/.local/bin" ] ; then
@@ -40,3 +43,16 @@ fi
 if [ -e "$HOME/.local/opt/intel/bin/compilervars.sh" ] && [ "uname -m" == "x86_64" ] ; then
     source "$HOME/.local/opt/intel/bin/compilervars.sh" intel64
 fi
+
+# edit Ubuntu settings
+if [ $DISTRIBUTION == "Ubuntu" ] ; then
+    ## Map ctrl to caps lock
+    gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps']"
+
+    ## Map 'show-hud' from alt to alt-super
+    gsettings set org.compiz.integrated show-hud "['<Alt><Super>']"
+
+    ## Enable address bar on Nautilus
+    gsettings set org.gnome.nautilus.preferences always-use-location-entry  true
+fi
+

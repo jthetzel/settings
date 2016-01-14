@@ -17,7 +17,9 @@ if [ -n "$BASH_VERSION" ]; then
 fi
 
 # get distribution name
-DISTRIBUTION=`awk -F= '/^NAME/{print $2}' /etc/os-release`
+if [ -f "/etc/os-release" ] ; then
+    DISTRIBUTION=`awk -F= '/^NAME/{print $2}' /etc/os-release`
+fi
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/.local/bin" ] ; then

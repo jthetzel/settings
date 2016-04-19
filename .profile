@@ -21,6 +21,11 @@ if [ -f "/etc/os-release" ] ; then
     DISTRIBUTION=`awk -F= '/^NAME/{print $2}' /etc/os-release`
 fi
 
+# set EDITOR to emacs if it exists
+if command -v emacs ; then
+    EDITOR=emacs
+fi
+
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
@@ -47,7 +52,7 @@ if [ -e "$HOME/.local/opt/intel/bin/compilervars.sh" ] && [ "uname -m" == "x86_6
 fi
 
 # edit Ubuntu settings
-if [ $DISTRIBUTION == "Ubuntu" ] ; then
+if [ "$DISTRIBUTION" == "Ubuntu" ] ; then
     ## Map ctrl to caps lock
     gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps']"
 
@@ -57,4 +62,3 @@ if [ $DISTRIBUTION == "Ubuntu" ] ; then
     ## Enable address bar on Nautilus
     gsettings set org.gnome.nautilus.preferences always-use-location-entry  true
 fi
-

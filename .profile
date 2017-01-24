@@ -31,6 +31,11 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
+# set ANDROID_HOME for include Android SDK
+if [ -d "/usr/local/opt/android-sdk" ] ; then
+    ANDROID_HOME="/usr/local/opt/android-sdk"
+fi
+
 # set PATH to include Android SDK
 if [ -d "$HOME/.local/opt/android/tools" ] ; then
     PATH="$HOME/.local/opt/android/tools:$PATH"
@@ -62,3 +67,52 @@ if [ "$DISTRIBUTION" == "Ubuntu" ] ; then
     ## Enable address bar on Nautilus
     gsettings set org.gnome.nautilus.preferences always-use-location-entry  true
 fi
+
+# Python virtualenvwrapper
+if [ -e "/usr/local/bin/virtaulenvwrapper.sh" ] ; then
+    export WORKON_HOME=$HOME/.virtualenvs/
+    export PROJECT_HOME=$HOME/.local/src/
+    source /usr/local/bin/virtualenvwrapper.sh
+fi
+
+# PyCon 2016
+if [ -d "$HOME/pycon/openshift/mnt/redhat/staging-cds/ose-clients-3.1.1.6/usr/share/atomic-openshift/macosx" ] ; then
+    PATH="$PATH:$HOME/pycon/openshift/mnt/redhat/staging-cds/ose-clients-3.1.1.6/usr/share/atomic-openshift/macosx"
+fi
+
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+
+# The next line updates PATH for the Google Cloud SDK.
+source '/Users/jthetzel/.local/src/google-cloud-sdk/path.bash.inc'
+
+# The next line enables shell command completion for gcloud.
+source '/Users/jthetzel/.local/src/google-cloud-sdk/completion.bash.inc'
+
+# Git-flow
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
+fi
+
+if [ -f "$HOME/.local/src/git-flow-completion/git-flow-completion.bash" ]; then
+    source "$HOME/.local/src/git-flow-completion/git-flow-completion.bash"
+fi
+
+
+# Setting PATH for Python 3.6
+# The original version is saved in .profile.pysave
+PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin:${PATH}"
+export PATH
+
+# Setting PATH for Python 3.6
+# The original version is saved in .profile.pysave
+PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin:${PATH}"
+export PATH
+
+# Setting PATH for Python 3.5
+# The original version is saved in .profile.pysave
+PATH="/Library/Frameworks/Python.framework/Versions/3.5/bin:${PATH}"
+export PATH
+
+export NVM_DIR="/Users/jthetzel/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
